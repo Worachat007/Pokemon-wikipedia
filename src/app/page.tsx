@@ -41,6 +41,21 @@ export default async function Home() {
           boxShadow: "0 20px 40px rgba(59, 130, 246, 0.25)",
         }}
       >
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
+          <a
+            href="/about"
+            style={{
+              color: "#ffffff",
+              textDecoration: "none",
+              fontWeight: 700,
+              background: "rgba(255,255,255,0.2)",
+              padding: "8px 12px",
+              borderRadius: 999,
+            }}
+          >
+            About this project
+          </a>
+        </div>
         <h1 style={{ margin: "0 0 8px", fontSize: "2.25rem", fontWeight: 800, letterSpacing: "0.04em", color: "#ffffff" }}>
           Pokémon Gallery
         </h1>
