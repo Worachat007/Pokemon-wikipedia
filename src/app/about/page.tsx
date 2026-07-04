@@ -10,7 +10,7 @@ export default function AboutPage() {
     <div
       style={{
         minHeight: "100vh",
-        padding: "32px",
+        padding: "24px 16px",
         background: "linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%)",
       }}
     >
@@ -31,7 +31,7 @@ export default function AboutPage() {
         <div
           style={{
             borderRadius: 32,
-            padding: 32,
+            padding: "24px 20px",
             background: "#ffffff",
             boxShadow: "0 24px 50px rgba(15, 23, 42, 0.12)",
             border: "1px solid #e2e8f0",
@@ -46,7 +46,7 @@ export default function AboutPage() {
               marginBottom: 24,
             }}
           >
-            <h1 style={{ margin: "0 0 10px", fontSize: "2rem", fontWeight: 800 }}>
+            <h1 style={{ margin: "0 0 10px", fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 800 }}>
               About This Project
             </h1>
             <p style={{ margin: 0, lineHeight: 1.7, color: "rgba(255,255,255,0.95)" }}>
@@ -64,7 +64,7 @@ export default function AboutPage() {
                 border: "1px solid #e2e8f0",
               }}
             >
-              <h2 style={{ margin: "0 0 10px", fontSize: "1.1rem", color: "#111827" }}>
+              <h2 style={{ margin: "0 0 10px", fontSize: "clamp(1rem, 2.2vw, 1.1rem)", color: "#111827" }}>
                 📌 Project Overview
               </h2>
               <p style={{ margin: 0, color: "#4b5563", lineHeight: 1.7 }}>
@@ -80,7 +80,7 @@ export default function AboutPage() {
                 border: "1px solid #dbeafe",
               }}
             >
-              <h2 style={{ margin: "0 0 12px", fontSize: "1.1rem", color: "#111827" }}>
+              <h2 style={{ margin: "0 0 12px", fontSize: "clamp(1rem, 2.2vw, 1.1rem)", color: "#111827" }}>
                 👤 Developer Information
               </h2>
               <div style={{ display: "grid", gap: 6 }}>
@@ -110,7 +110,7 @@ export default function AboutPage() {
                 border: "1px solid #e2e8f0",
               }}
             >
-              <h2 style={{ margin: "0 0 10px", fontSize: "1.1rem", color: "#111827" }}>
+              <h2 style={{ margin: "0 0 10px", fontSize: "clamp(1rem, 2.2vw, 1.1rem)", color: "#111827" }}>
                 🔗 Source Code
               </h2>
               <p style={{ margin: "0 0 14px", color: "#4b5563", lineHeight: 1.7 }}>
