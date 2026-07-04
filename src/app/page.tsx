@@ -1,66 +1,82 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Skeleton from "@mui/material/Skeleton";
+import { Suspense } from "react";
+import HomeClient from "../components/HomeClient";
 
-export default function Home() {
+interface PokemonListItem {
+  name: string;
+  url: string;
+}
+
+async function getInitialPokemonPage() {
+  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20", {
+    next: { revalidate: 3600 },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch initial Pokemon data");
+  }
+
+  return response.json();
+}
+
+export default async function Home() {
+  const data = await getInitialPokemonPage();
+  const initialPokemon: PokemonListItem[] = data.results ?? [];
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div
+      style={{
+        padding: "32px",
+        background: "radial-gradient(circle at top, #fff7ed 0%, #fef2f2 35%, #eff6ff 100%)",
+        minHeight: "100vh",
+      }}
+    >
+      <div
+        style={{
+          marginBottom: 24,
+          padding: "24px 28px",
+          borderRadius: 28,
+          background: "linear-gradient(135deg, #ef4444 0%, #3b82f6 100%)",
+          color: "white",
+          boxShadow: "0 20px 40px rgba(59, 130, 246, 0.25)",
+        }}
+      >
+        <h1 style={{ margin: "0 0 8px", fontSize: "2.25rem", fontWeight: 800, letterSpacing: "0.04em", color: "#ffffff" }}>
+          Pokémon Gallery
+        </h1>
+        <p style={{ margin: 0, color: "#fef2f2", fontSize: "1rem" }}>
+          ค้นหาและเปิดดูโปเกม่อนโปรดของคุณแบบเกมมาส์คด้วยสไตล์ Pokémon
+        </p>
+      </div>
+
+      <Suspense
+        fallback={
+          <div
+            style={{
+              display: "grid",
+              gap: 16,
+              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            }}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div
+                key={index}
+                style={{
+                  borderRadius: 24,
+                  padding: 18,
+                  backgroundColor: "white",
+                  boxShadow: "0 20px 40px rgba(15, 23, 42, 0.08)",
+                }}
+              >
+                <Skeleton variant="circular" width={96} height={96} sx={{ mx: "auto", mb: 1.5 }} />
+                <Skeleton variant="text" width="60%" sx={{ mx: "auto" }} />
+              </div>
+            ))}
+          </div>
+        }
+      >
+        <HomeClient initialPokemon={initialPokemon} nextUrl={data.next} />
+      </Suspense>
     </div>
   );
 }
