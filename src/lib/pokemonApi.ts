@@ -96,8 +96,8 @@ function extractEvolutionChain(
 function getMegaForms(varieties: Array<{ is_default: boolean; pokemon: { name: string; url: string } }> = []): Array<{ name: string }> {
   return varieties
     .filter((variety) => !variety.is_default)
-    .map((variety) => variety.pokemon.name)
-    .filter((name) => name.includes("mega"));
+    .map((variety) => ({ name: variety.pokemon.name }))
+    .filter((form) => form.name.includes("mega"));
 }
 
 function addMegaEvolutionForms(
